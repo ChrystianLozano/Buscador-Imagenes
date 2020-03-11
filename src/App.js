@@ -14,7 +14,7 @@ function App() {
     const consultarApi = async () => {
           if(busqueda === '') return
 
-    const imagenesPorPagina = 30
+    const imagenesPorPagina = 80
     const key = '15568648-5149113c1ffbcfcb190c2bcaa'
     const url = `https://pixabay.com/api/?key=${key}&q=${busqueda}&per_page${imagenesPorPagina}`
 
