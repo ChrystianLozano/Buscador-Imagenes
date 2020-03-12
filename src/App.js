@@ -37,20 +37,39 @@ function App() {
 
   },[busqueda])
 
+  //definir pagina anterior
+  const paginaAnterior = () => {
+    const nuevaPaginaActual = paginaactual - 1
+    
+    if(nuevaPaginaActual === 0) return
 
+    guardarPaginaactual(nuevaPaginaActual)
+  }
+
+  //definir pagina siguiente
+  const paginaSiguente = () => {
+    const nuevaPaginaActual = paginaactual + 1;
+
+    if(nuevaPaginaActual > totalpaginas) return
+
+     guardarPaginaactual(nuevaPaginaActual);    
+  }
 
   return (
-    <div className="container">
+    <div className="container pb-4">
       <div className="jumbotron">
         <p className="lead text-center">Buscador de Imágenes</p>
-        <Formulario 
-          guardarBusqueda = {guardarBusqueda}
-        />
+        <Formulario guardarBusqueda={guardarBusqueda} />
       </div>
       <div className="row justify-content-center">
-          <ListadoImagenes
-          imagenes={imagenes}
-          />
+        <ListadoImagenes imagenes={imagenes} />
+
+        <button type="button" className="bbtn btn-info mr-1" onClick={paginaAnterior}>
+          Anterior &laquo;
+        </button>
+        <button type="button" className="bbtn btn-info" onClick={paginaSiguente}>
+          Siguiente &raquo;
+        </button>
       </div>
     </div>
   );
