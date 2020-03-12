@@ -19,7 +19,7 @@ function App() {
 
     const imagenesPorPagina = 30
     const key = '15568648-5149113c1ffbcfcb190c2bcaa'
-    const url = `https://pixabay.com/api/?key=${key}&q=${busqueda}&per_page${imagenesPorPagina}`
+    const url = `https://pixabay.com/api/?key=${key}&q=${busqueda}&per_page${imagenesPorPagina}&page=${paginaactual}`
 
     const respuesta = await fetch(url)
     const resultado = await respuesta.json()
@@ -35,7 +35,7 @@ function App() {
 
     consultarApi()
 
-  },[busqueda])
+  },[busqueda, paginaactual])
 
   //definir pagina anterior
   const paginaAnterior = () => {
@@ -63,13 +63,18 @@ function App() {
       </div>
       <div className="row justify-content-center">
         <ListadoImagenes imagenes={imagenes} />
-
-        <button type="button" className="bbtn btn-info mr-1" onClick={paginaAnterior}>
+        {
+        (paginaactual === 1) ? null
+        : (<button type="button" className="bbtn btn-info mr-1" onClick={paginaAnterior}>
           Anterior &laquo;
-        </button>
-        <button type="button" className="bbtn btn-info" onClick={paginaSiguente}>
+        </button>)
+        }
+        {
+        (paginaactual === totalpaginas) ? null
+        : (<button type="button" className="bbtn btn-info" onClick={paginaSiguente}>
           Siguiente &raquo;
-        </button>
+        </button>)
+        }
       </div>
     </div>
   );
